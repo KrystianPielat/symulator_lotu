@@ -149,8 +149,6 @@ void onDrag(int x, int y)
 }
 
 void autoPilot() {
-
-
 	int depth = 20;
 	float max = 0;
 	float x, y;
@@ -394,12 +392,12 @@ void display() {
 		glBindTexture(GL_TEXTURE_2D, cockpit);
 		glEnable(GL_TEXTURE_GEN_S);
 		glEnable(GL_TEXTURE_GEN_T);
-		float planoS[] = { 1,0,0,0.5 };
-		float planoT[] = { 0,1,0,-0.5 };
+		float plane1[] = { 1,0,0,0.5 };
+		float plane2[] = { 0,1,0,-0.5 };
 		glTexGeni(GL_S, GL_TEXTURE_GEN_MODE, GL_OBJECT_LINEAR);
-		glTexGenfv(GL_S, GL_OBJECT_PLANE, planoS);
+		glTexGenfv(GL_S, GL_OBJECT_PLANE, plane1);
 		glTexGeni(GL_T, GL_TEXTURE_GEN_MODE, GL_OBJECT_LINEAR);
-		glTexGenfv(GL_T, GL_OBJECT_PLANE, planoT);
+		glTexGenfv(GL_T, GL_OBJECT_PLANE, plane2);
 		glDisable(GL_LIGHTING);
 
 		glRotatef(-view[1] + 3, 1, 0, 0);
@@ -450,9 +448,9 @@ void onIdle()
 
 }
 
-void onKey(unsigned char tecla, int x, int y) {
+void onKey(unsigned char key, int x, int y) {
 
-	switch (tolower(tecla)) {
+	switch (tolower(key)) {
 	case 'a':
 		if (velocity < 0.015f);
 		velocity += 0.001f;
@@ -485,8 +483,8 @@ void onKey(unsigned char tecla, int x, int y) {
 	glutPostRedisplay();
 }
 
-void onArrow(int tecla, int x, int y) {
-	switch (tecla) {
+void onArrow(int key, int x, int y) {
+	switch (key) {
 	case GLUT_KEY_LEFT:
 		cam_pos[3] -= 1;
 		break;
@@ -505,9 +503,9 @@ void onArrow(int tecla, int x, int y) {
 
 
 
-void onTimer(int tiempo)
+void onTimer(int time)
 {
-	glutTimerFunc(tiempo, onTimer, tiempo);
+	glutTimerFunc(time, onTimer, time);
 
 	onIdle();
 }
